@@ -33,7 +33,7 @@ occupations["Jayne"] = "Public Relations"
 
 let emptyArray = String[]()
 let emptyDictionary = Dictionary<String, Float>()
-shoppingList = [] //went shopping and bought everyTHING!! (empty array)
+shoppingList = [] // went shopping and bought everyTHING!! (empty array)
 
 /// CONTROL FLOW --->
 
@@ -132,7 +132,7 @@ greet("Fero", "Tuesday")
 func greett(name: String,lunchSpecial: String) -> String { // experiment -->
     return "Hello \(name), today is served \(lunchSpecial) as lunch special."
 }
-greett("Fero", "salad and scrambled eggs")
+greett("Fero", "salad and scrambled eggs") // <-- experiment
 
 // tuple (multiple return...) --->
 
@@ -161,7 +161,7 @@ func averageOf(numbers: Int...) -> Int { // experiment -->
     average = sum / numOfVal
     return average
 }
-averageOf(4,5,6)
+averageOf(4,5,6) // <-- experiment
 
 // Nested Functions --->
 
@@ -209,7 +209,7 @@ numbers.map ({
         return result
     } else {
         return 0
-    }
+    } // <-- experiment
 })
 
 numbers.map({ number in 3 * number})
@@ -230,7 +230,7 @@ class NamedShape {
     }
     func toSecondPower(value: Int) -> Int { // experiment -->
         return value*value
-    }
+    } // <-- experiment
 }
 
 var shape = NamedShape(numberOfSides: 6, name: "cube")
@@ -277,7 +277,8 @@ class Circle:NamedShape { // experiment -->
 
 let circle = Circle(radius: 5.63, name: "circle")
 circle.area()
-circle.simpleDescription()
+circle.simpleDescription() // <-- experiment
+
 // getters and setters
 
 class EquilateralTriangle: NamedShape {
@@ -306,6 +307,7 @@ let equilateralTriangle = EquilateralTriangle(sideLenght: 3.5, name: "equilatera
 equilateralTriangle.perimeter
 equilateralTriangle.perimeter = 9.9
 equilateralTriangle.sideLenght
+
 // will set
 
 class TriangleAndSquare {
@@ -334,10 +336,145 @@ triangleAndSquare.triangle.sideLenght
 triangleAndSquare.square = Square(sideLenght: 50, name: "larger square")
 triangleAndSquare.triangle.sideLenght
 
+class Counter{
+    var count: Int = 0
+    func incrementBy(amount: Int, numberOfTimes times: Int) {
+        count += amount*times
+    }
+}
+var counter = Counter()
+counter.incrementBy(2, numberOfTimes: 7)
 
+// optional values -->
 
+let optionalSquare: Square? = Square(sideLenght: 2.5, name: "optional square")
+let sideLenght = optionalSquare?.sideLenght
 
+/// ENUMERATIONS AND STRUCTURES --->
 
+enum Rank: Int {
+    case Ace = 1
+    case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+    case Jack, Queen, King
+    func simpleDescription() -> String {
+        switch self {
+            case .Ace:
+                return "ace"
+            case .Jack:
+                return "jack"
+            case .Queen:
+                return "queen"
+            case .King:
+                return "king"
+            default:
+                return String(self.toRaw())
+        }
+    }
+    
+    func compareTwoRanksByRaw(rankOne: String, rankTwo: String) -> String { // experiment -->
+        if rankOne > rankTwo {
+            return "\(rankOne) is bigger than \(rankTwo)."
+        } else {
+            return "\(rankTwo) is bigger than \(rankOne)."
+        }
+    }
+}
+
+let ace = Rank.Ace
+let aceRawValue = ace.toRaw()
+
+var biggerValue = Rank.Ace.compareTwoRanksByRaw("\(Rank.Ace.toRaw())", rankTwo: "\(Rank.Three.toRaw())") // <-- experiment
+
+if let convertedRank = Rank.fromRaw(9) {
+    let threeDescription = convertedRank.simpleDescription()
+}
+
+enum Suit {
+    case Spades, Hearts, Diamonds, Clubs
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .Spades:
+            return "spades"
+        case .Hearts:
+            return "hearts"
+        case .Diamonds:
+            return "diamonds"
+        case .Clubs:
+            return "clubs"
+        }
+    }
+    
+    func color() -> String { // experiment -->
+        switch self {
+        case .Hearts:
+            return "red"
+        case .Diamonds:
+            return "red"
+        default:
+            return "black"
+        }
+    }
+}
+let hearts = Suit.Hearts
+let clubs = Suit.Clubs
+let heartsDescription = hearts.simpleDescription()
+let clubsDescription = clubs.simpleDescription()
+
+hearts.color() // <-- experiment
+clubs.color()  // <-- experiment
+
+// Struct..
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+    
+    func createDeck() -> String { // experiment (O.M.G. this literally took me ages.) - I'm sure it can be done much easier way but I just don't care now, if you have better idea send me an email..) -->
+        var deck: String = ""
+        var s = 1
+        var i = 1
+        while s < 5 {
+            if s == 1 {
+                while i < 14 {
+                    var card = Card(rank: Rank.fromRaw(i)!, suit: Suit.Clubs)
+                    deck += " \(card.simpleDescription()),"
+                    i++
+                }
+            } else if s == 2 {
+                while i < 14 {
+                    var card = Card(rank: Rank.fromRaw(i)!, suit: Suit.Spades)
+                    deck += " \(card.simpleDescription()),"
+                    i++
+                }
+            } else if s == 3 {
+                while i < 14 {
+                    var card = Card(rank: Rank.fromRaw(i)!, suit: Suit.Diamonds)
+                    deck += " \(card.simpleDescription()),"
+                    i++
+                }
+            } else if s == 4 {
+                while i < 14 {
+                    var card = Card(rank: Rank.fromRaw(i)!, suit: Suit.Hearts)
+                    deck += " \(card.simpleDescription()),"
+                    i++
+                }
+            }
+            s += 1
+            i=1
+        }
+        return deck
+    }
+}
+
+let threeOfSpades = Card(rank: .Three, suit: .Spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+
+var deck = threeOfSpades.createDeck() // <-- experiment
 
 
 
