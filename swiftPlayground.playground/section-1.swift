@@ -476,6 +476,127 @@ let threeOfSpadesDescription = threeOfSpades.simpleDescription()
 
 var deck = threeOfSpades.createDeck() // <-- experiment
 
+enum ServerResponse {
+    case Result(String, String)
+    case Error(String)
+    case RequestDaysInMonth(Int)
+}
+
+let success = ServerResponse.Result("6:00 am", "8:09 pm")
+let failure = ServerResponse.Error("Out of cheese.")
+
+switch success {
+case let .Result(sunrise, sunset):
+    let serverResponse = "Sunrise is at \(sunrise) and sunset is at \(sunset)."
+case let .Error(error):
+    let serverResponse = "Failure... \(error)."
+case let .RequestDaysInMonth(days):
+    let serverResponse = "The number of days in this month is \(days)."
+}
+
+/// PROTOCOLS and EXTENSIONS --->
+
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+}
+
+class SimpleClass: ExampleProtocol {
+    var simpleDescription: String = "A very simple description."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += " Now 100% adjusted."
+    }
+}
+var a = SimpleClass()
+a.adjust()
+let aDescription = a.simpleDescription
+
+struct SimpleStructure: ExampleProtocol {
+    var simpleDescription: String = "A simple structure"
+    mutating func adjust()  {
+        simpleDescription += " (adjusted)"
+    }
+}
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription
+
+enum SimpleEnum: ExampleProtocol { // experiment -->
+    case  Base, Adjusted
+    
+    var simpleDescription: String {
+    get {
+        return self.getDescription()
+        }
+    }
+    
+    func getDescription() -> String {
+        switch self {
+        case .Base:
+            return "A simple enum"
+        case .Adjusted:
+            return "Adjusted simple enum"
+        }
+    }
+    mutating func adjust() {
+        self = SimpleEnum.Adjusted
+    }
+    
+}
+var c = SimpleEnum.Base
+c.adjust()
+let cDescription = c.simpleDescription // <-- experiment
+
+// Extension -->
+
+extension Int: ExampleProtocol {
+    var simpleDescription: String {
+    return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+7.simpleDescription
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
