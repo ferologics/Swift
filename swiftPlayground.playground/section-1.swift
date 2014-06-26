@@ -560,24 +560,63 @@ extension Int: ExampleProtocol {
 }
 7.simpleDescription
 
+extension Double: ExampleProtocol { // experiment -->
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+    
+    var absoluteValue: String {
+        if self < 0 {
+            return "The absolute value of \(self) is \(self*(-1))"
+        } else {
+            return "The absolute value is \(self)"
+        }
+    }
+    
+    mutating func adjust() {
+        self += 42.6
+    }
+}
+7.86.simpleDescription
+(-3.54).absoluteValue // <-- experiment
 
+let protocolValue: ExampleProtocol = a
+protocolValue.simpleDescription
+// protocolValue.anotherProperty // uncomment to see the error
 
+// GENERICS --->
 
+func repeat<ItemType>(item: ItemType, times: Int) -> ItemType[] {
+    var result = ItemType[]()
+    for i in 0..times {
+        result += item
+    }
+    return result
+}
+repeat("knock", 5)
 
+// Reimplement the Swift standard library's optional type
 
+enum OptionalValue<T> {
+    case None
+    case Some(T)
+}
+var possibleInteger: OptionalValue<Int> = .None
+possibleInteger = .Some(100)
 
+func anyCommonElements <T, U where T: Sequence, U: Sequence, T.GeneratorType.Element: Equatable, T.GeneratorType.Element == U.GeneratorType.Element> (lhs: T, rhs: U) -> Array<T.GeneratorType.Element> { // experiment -->
+    var ar: T.GeneratorType.Element[] = []
+    for lhsItem in lhs {
+        for rhsItem in rhs {
+            if lhsItem == rhsItem {
+                ar.append(rhsItem)
+            }
+        }
+    }
+    return ar // <-- experiment
+}
 
-
-
-
-
-
-
-
-
-
-
-
+anyCommonElements([2,3,4,5,7], [3,4,5,6,7,8])
 
 
 
