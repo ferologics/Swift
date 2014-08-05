@@ -619,15 +619,43 @@ func anyCommonElements <T, U where T: Sequence, U: Sequence, T.GeneratorType.Ele
 anyCommonElements([2,3,4,5,7], [3,4,5,6,7,8])
 
 
+/// LANGUAGE GUIDE --->
 
+var x = 3, y = 5, z = 7 //  you can declare multiple vars/constants on a single line using commas
 
+let pi = 3.14159
 
+// some optionals
 
+let possibleNumber = "123"
+let convertedNumber = possibleNumber.toInt()
 
+if convertedNumber {
+    println("\(possibleNumber) has an integer value of \(convertedNumber!)")
+} else {
+    println("\(possibleNumber) couldnt be converted to an integer.")
+}
 
+// optional binding
 
+if let actualNumber = possibleNumber.toInt() {
+    println("\(possibleNumber) has an integer value of \(actualNumber)")
+} else {
+    println("\(possibleNumber) couldnt be converted to an integer")
+}
 
+// nil
 
+var serverResponseCode: Int? = 404
+serverResponseCode = nil
+
+var surveyAnswer: String? // automatically set to nil
+
+let possibleString: String? = "An optional string."
+println("\(possibleString!)")
+
+let assumedString: String! = "An implicitly unwraped optional string."
+println("\(assumedString)")
 
 
 
