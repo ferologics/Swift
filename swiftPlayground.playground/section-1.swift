@@ -674,7 +674,7 @@ if let definiteString = assumedString {
 // Assertions -->
 
 let age = -3
-assert(age >= 0, "A persons age cannot be less than zero.")
+/* assert(age >= 0, "A persons age cannot be less than zero.") */ // this stops console output, etc... (whole playground)
 
 /* can be written aswell as "assert(age >= 0)" */
 
@@ -760,28 +760,87 @@ for scene in romeoAndJuliet {
 
 println("\(mansionCount) mansion scenes; \(cellCount) cell scenes")
 
+// uppercase/lowercase String
 
+let normal = "Could you help me, please?"
 
+let shouty = normal.uppercaseString
+let whisper = normal.lowercaseString
 
+/// Unicode --->
 
+let dogString = "Dog!🐶"
 
+// UTF8 ->
 
+for codeUnit in dogString.utf8 {
+    println("\(codeUnit) ")
+}
 
+for codeUnit in dogString.utf8 {
+    print("\(codeUnit) ")
+}
+print("\n")
 
+// UTF16 ->
 
+for codeUnit in dogString.utf16 {
+    println("\(codeUnit) ")
+}
 
+// Unicode Scalars ->
 
+for scalar in dogString.unicodeScalars {
+    print("\(scalar.value)")
+}
+print("\n")
 
+for scalar in dogString.unicodeScalars {
+    println("\(scalar)")
+}
+// supposed to  print D O G ! 🐶 etc... u get it..
 
+/// COLLECTION TYPES --->
 
+// Arrays -->
 
+var shoppinggList: String[] = [ "eggs", "coffe", "milk"]
 
+shoppinggList.append( "flour")
+// or
+shoppinggList += "baking powder"
+shoppinggList += ["meat", "chilli", "snails"]
 
+var firstItem = shoppinggList[0]
 
+shoppinggList[0] = "six eggs"
 
+shoppinggList[4...6] = ["Nothing"]
 
+// inserting 
 
+shoppinggList.insert("Maple Sirup", atIndex: 5)
 
+let mapleSirup = shoppinggList.removeAtIndex(5)
+
+let myLastItem = shoppinggList.removeLast() // u can remove last item using this function if not in knowledge of exact number of items in array
+
+// Iterating over an array ->
+
+for item in shoppinggList {
+    println(item)
+}
+
+// or use enumerate function
+
+for (index, value) in enumerate(shoppinggList) {
+    println("Item\(index+1): \(value)")
+}
+
+// Creating and initializing an array
+
+var someInts = Int[]()
+println("someInts is of type Int[] with \(someInts.count) items.")
 
 
 
