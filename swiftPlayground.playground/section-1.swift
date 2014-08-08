@@ -109,6 +109,7 @@ do {
     m *= 2
 } while m < 100
 m
+
 // alternative style --->
 var firstLoop = 0
 for i in 0..3 { // use .. to make range that omits its upper value, and use ... to make range that includes both values!!! :D
@@ -631,31 +632,183 @@ let possibleNumber = "123"
 let convertedNumber = possibleNumber.toInt()
 
 if convertedNumber {
-    println("\(possibleNumber) has an integer value of \(convertedNumber!)")
+    println("\(possibleNumber) has an integer value of \(convertedNumber!)") // doesnt print
 } else {
-    println("\(possibleNumber) couldnt be converted to an integer.")
+    println("\(possibleNumber) couldnt be converted to an integer.") // doesnt print
 }
 
 // optional binding
 
 if let actualNumber = possibleNumber.toInt() {
-    println("\(possibleNumber) has an integer value of \(actualNumber)")
+    println("\(possibleNumber) has an integer value of \(actualNumber)") // doesnt print
 } else {
-    println("\(possibleNumber) couldnt be converted to an integer")
+    println("\(possibleNumber) couldnt be converted to an integer") // doesnt print
 }
 
 // nil
 
-var serverResponseCode: Int? = 404
+var serverResponseCode: Int? = 404 // whats this "some" doing here?
 serverResponseCode = nil
 
 var surveyAnswer: String? // automatically set to nil
 
 let possibleString: String? = "An optional string."
-println("\(possibleString!)")
+println(possibleString!) // doesnt print
 
 let assumedString: String! = "An implicitly unwraped optional string."
-println("\(assumedString)")
+
+// doesnt print
+
+println(assumedString)
+
+if assumedString {
+    println(assumedString) // doesnt print
+}
+
+if let definiteString = assumedString {
+    println(definiteString) // doesnt print
+}
+
+/* dunno why it doesnt print */
+
+// Assertions -->
+
+let age = -3
+assert(age >= 0, "A persons age cannot be less than zero.")
+
+/* can be written aswell as "assert(age >= 0)" */
+
+// doesnt print
+
+/// Basic Operators -->
+
+let contentHeight = 40
+let hasHeader = true
+let rowHeight = contentHeight + (hasHeader ? 50 : 20) // ternary operator (3)
+
+// Range operators
+
+//closed range operator
+
+for index in 0...5 {
+    println("\(index) times five is \(index*5).") //shows in assistant editor but not in playground :/ // doesnt print
+}
+
+// half closed range operator
+
+let names = ["Anna", "Mike", "Fero", "Pluto"]
+let count = names.count
+
+for i in 0..count {
+    println("Person number \(i + 1) is called \(names[i]).") // doesnt print
+}
+
+// String and Characters --->
+
+var emptyString = ""
+
+if emptyString.isEmpty {
+    println("Nothing to see here") // doesnt print
+}
+
+for character in "Doggieee!" {
+    println(character)  // doesnt print
+}
+
+let yenSign: Character = "¥"
+
+let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
+println("UnusualMenagerie has \(countElements(unusualMenagerie)) characters.")
+
+let romeoAndJuliet = [
+    "Act 1 Scene 1: Verona, A public place",
+    "Act 1 Scene 2: Capulet's mansion",
+    "Act 1 Scene 3: A room in Capulet's mansion",
+    "Act 1 Scene 4: A street outside Capulet's mansion",
+    "Act 1 Scene 5: The Great Hall in Capulet's mansion",
+    "Act 2 Scene 1: Outside Capulet's mansion",
+    "Act 2 Scene 2: Capulet's orchard",
+    "Act 2 Scene 3: Outside Friar Lawrence's cell",
+    "Act 2 Scene 4: A street in Verona",
+    "Act 2 Scene 5: Capulet's mansion",
+    "Act 2 Scene 6: Friar Lawrence's cell"
+]
+
+// has preffix
+
+var act1SceneCount = 0
+
+for scene in romeoAndJuliet {
+    if scene.hasPrefix("Act 1 ") {
+        ++act1SceneCount
+    }
+}
+
+println("There are \(act1SceneCount) scenes in act one.")
+
+// has suffix
+
+var mansionCount = 0
+var cellCount = 0
+for scene in romeoAndJuliet {
+    if scene.hasSuffix("Capulet's mansion") {
+        ++mansionCount
+    } else if scene.hasSuffix("Friar Lawrence's cell") {
+        ++cellCount
+    }
+}
+
+println("\(mansionCount) mansion scenes; \(cellCount) cell scenes")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
