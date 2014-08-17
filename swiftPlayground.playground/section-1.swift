@@ -715,6 +715,8 @@ for character in "Doggieee!" {
     println(character)  // doesnt print
 }
 
+/// FROM NOW ON IT DOESNT PRINT TO CONSOLE ;(
+
 let yenSign: Character = "¥"
 
 let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
@@ -733,6 +735,8 @@ let romeoAndJuliet = [
     "Act 2 Scene 5: Capulet's mansion",
     "Act 2 Scene 6: Friar Lawrence's cell"
 ]
+
+/// OR SOMETIMES FROM NOW ON IT DOESNT PRINT TO CONSOLE ;(
 
 // has preffix
 
@@ -841,6 +845,58 @@ for (index, value) in enumerate(shoppinggList) {
 
 var someInts = Int[]()
 println("someInts is of type Int[] with \(someInts.count) items.")
+
+someInts.append(3)
+someInts = [] // now empty
+
+var threeDoubles = Double[](count:3, repeatedValue:0.0) // array with size of 3 with type Double
+
+var anotherThreeDoubles = Array(count:3, repeatedValue: 2.5) // infered type <3
+
+// u can add arrays together omg :##
+
+var newArray = threeDoubles + anotherThreeDoubles
+
+// Dictionaries --->
+
+var airports: Dictionary<String, String> = ["TYO" : "Tokyo", "DUB" : "Dublin"]
+
+println("The dictionary of airports contains \(airports.count) items.")
+
+airports["LHR"] = "London"
+airports["LHR"] = "London Heathrow"
+
+if let oldValue = airports.updateValue("Dublin International", forKey: "DUB") {
+    println("The old value for DUB was \(oldValue).")
+}
+
+if let airportName = airports["DUB"] {
+    println("The name of the airport is \(airportName).")
+} else {
+    println("That airport is not in the airports dictionary.")
+}
+
+airports["APL"] = "Apple International"
+airports["APL"] = nil // remove using subscript syntaX
+
+
+if let removedValue = airports.removeValueForKey("DUB") {
+    println("The removed airport's name is \(removedValue).")
+} else {
+    println("The airports dictionary does not contain a value for DUB.")
+}
+
+// iterating over a dictionary -->
+
+for (airportCode, airportName) in airports {
+    println("\(airportCode): \(airportName)")
+}
+
+
+
+
+
+
 
 
 
